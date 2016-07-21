@@ -27,7 +27,7 @@ if ($data !== false && $data !== '') {
 //      able to quickly assess a fix. SimpleTest's problem is my problem!
 
 // Where is SimpleTest located? Remember to include a trailing slash!
-$simpletest_location = __FILE__ . '/simpletest';
+$simpletest_location = dirname(__FILE__) . '/simpletest/';
 
 // -----------------------------------------------------------------------------
 // OPTIONAL SETTINGS
