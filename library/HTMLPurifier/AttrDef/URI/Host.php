@@ -136,7 +136,7 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
                 // XXX error reporting
             }
         }
-        echo "We're hopeless\n"
+        echo "We're hopeless\n";
         return false;
     }
 }
