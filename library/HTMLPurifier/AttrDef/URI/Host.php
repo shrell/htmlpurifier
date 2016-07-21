@@ -57,6 +57,7 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
         if ($ipv4 !== false) {
             return $ipv4;
         }
+        echo "OK, normal\n";
 
         // A regular domain name.
 
@@ -90,19 +91,24 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
         $toplabel = "$an(?:$and*$an)?";
         // hostname    = *( domainlabel "." ) toplabel [ "." ]
         if (preg_match("/^(?:$domainlabel\.)*($toplabel)\.?$/i", $string, $matches)) {
+            echo "YAY\n";
+            var_dump($matches);
             if (!ctype_digit($matches[1])) {
                 return $string;
             }
         }
+        echo "Looks like IDN\n";
 
         // PHP 5.3 and later support this functionality natively
         if (function_exists('idn_to_ascii')) {
+            echo "idn_to_ascii\n";
             return idn_to_ascii($string);
 
         // If we have Net_IDNA2 support, we can support IRIs by
         // punycoding them. (This is the most portable thing to do,
         // since otherwise we have to assume browsers support
         } elseif ($config->get('Core.EnableIDNA')) {
+            echo "EnableIDNA\n";
             $idna = new Net_IDNA2(array('encoding' => 'utf8', 'overlong' => false, 'strict' => true));
             // we need to encode each period separately
             $parts = explode('.', $string);
@@ -130,6 +136,7 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
                 // XXX error reporting
             }
         }
+        echo "We're hopeless\n"
         return false;
     }
 }
