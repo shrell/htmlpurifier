@@ -47,6 +47,7 @@ class HTMLPurifier_LengthTest extends HTMLPurifier_Harness
         $this->assertValidate('3mm');
         $this->assertValidate('3pt');
         $this->assertValidate('3pc');
+        $this->assertValidate('3rem');
         $this->assertValidate('3PX', '3px');
         $this->assertValidate('3', false);
         $this->assertValidate('3miles', false);
